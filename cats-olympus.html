@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cats Olympus — Our Favourite Picks</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #fdf6ee;
+    --warm: #f5e6d3;
+    --orange: #e8854a;
+    --dark: #1a1108;
+    --muted: #7a6a58;
+    --card-bg: #fff9f4;
+  }
+
+  body {
+    background: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  .hero {
+    background: var(--dark);
+    padding: 48px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 60% 0%, #3d1f00 0%, transparent 70%),
+                radial-gradient(ellipse at 20% 100%, #2a1500 0%, transparent 60%);
+  }
+
+  .paw-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    font-size: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 10px;
+    pointer-events: none;
+  }
+
+  .hero-inner { position: relative; z-index: 1; }
+
+  .logo-icon {
+    font-size: 52px;
+    animation: float 3s ease-in-out infinite;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 7vw, 52px);
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+  }
+
+  .hero h1 span { color: var(--orange); }
+
+  .hero p {
+    color: #c9b89e;
+    font-size: 15px;
+    font-weight: 300;
+    max-width: 340px;
+    margin: 0 auto 20px;
+    line-height: 1.6;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(232,133,74,0.15);
+    border: 1px solid rgba(232,133,74,0.3);
+    color: var(--orange);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  .section-label {
+    text-align: center;
+    padding: 36px 24px 8px;
+  }
+
+  .section-label h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+
+  .section-label p {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .divider {
+    width: 40px;
+    height: 2px;
+    background: var(--orange);
+    margin: 8px auto 0;
+    border-radius: 2px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 20px 16px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.1s; }
+  .card:nth-child(3) { animation-delay: 0.15s; }
+  .card:nth-child(4) { animation-delay: 0.2s; }
+  .card:nth-child(5) { animation-delay: 0.25s; }
+  .card:nth-child(6) { animation-delay: 0.3s; }
+
+  .card.featured {
+    grid-column: 1 / -1;
+  }
+
+  .card-emoji {
+    background: linear-gradient(135deg, #2a1500, #3d2200);
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 44px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card.featured .card-emoji {
+    height: 110px;
+  }
+
+  .card-emoji::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(232,133,74,0.2), transparent 60%);
+  }
+
+  .hot-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--orange);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+    z-index: 1;
+    text-transform: uppercase;
+  }
+
+  .card-body {
+    padding: 12px;
+  }
+
+  .card.featured .card-body {
+    padding: 14px 16px;
+  }
+
+  .card-tag {
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--orange);
+    margin-bottom: 4px;
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    line-height: 1.3;
+    color: var(--dark);
+    margin-bottom: 5px;
+  }
+
+  .card.featured .card-title {
+    font-size: 17px;
+  }
+
+  .card-desc {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .card.featured .card-desc {
+    font-size: 12px;
+  }
+
+  .btn {
+    display: block;
+    background: var(--dark);
+    color: #fff;
+    text-align: center;
+    padding: 9px 12px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: background 0.2s;
+  }
+
+  .btn:hover { background: var(--orange); }
+
+  .btn-icon { margin-right: 4px; }
+
+  .footer {
+    text-align: center;
+    padding: 32px 24px 40px;
+    border-top: 1px solid rgba(0,0,0,0.07);
+    margin-top: 8px;
+  }
+
+  .footer p {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .footer .brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+
+  .social-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .social-btn {
+    background: var(--dark);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .social-btn:hover { background: var(--orange); }
+
+  .disclaimer {
+    font-size: 10px;
+    color: #bba990;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="paw-bg">
+    🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾
+  </div>
+  <div class="hero-inner">
+    <span class="logo-icon">🐱</span>
+    <h1>Cats <span>Olympus</span></h1>
+    <p>The products we actually use & love — hand-picked for the cats who deserve the best.</p>
+    <div class="badge">🛍️ Ships to UK & US</div>
+  </div>
+</div>
+
+<div class="section-label">
+  <h2>Our Top Picks</h2>
+  <p>Tried, tested & cat-approved</p>
+  <div class="divider"></div>
+</div>
+
+<div class="grid">
+
+  <div class="card featured">
+    <div class="card-emoji">
+      🎡
+      <span class="hot-badge">🔥 Most Popular</span>
+    </div>
+    <div class="card-body">
+      <div class="card-tag">Exercise</div>
+      <div class="card-title">The Cat Wheel That Broke the Internet</div>
+      <div class="card-desc">Indoor cats go wild for this. Keeps them active, entertained, and off your furniture. One of our absolute favourites.</div>
+      <a class="btn" href="https://amzn.to/3PsNkEj" target="_blank">
+        <span class="btn-icon">🛒</span> Shop on Amazon
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-emoji">🚀</div>
+    <div class="card-body">
+      <div class="card-tag">Travel</div>
+      <div class="card-title">Astronaut Cat Carrier</div>
+      <div class="card-desc">Your cat, the main character. Bubble window included.</div>
+      <a class="btn" href="https://amzn.to/4brKMyU" target="_blank">🛒 Shop Now</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-emoji">✨
+      <span class="hot-badge">Luxury</span>
+    </div>
+    <div class="card-body">
+      <div class="card-tag">Litter</div>
+      <div class="card-title">Self-Cleaning Litter Tray</div>
+      <div class="card-desc">Never scoop again. App-controlled. Life changing.</div>
+      <a class="btn" href="https://amzn.to/3NyaZCw" target="_blank">🛒 Shop Now</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-emoji">💧</div>
+    <div class="card-body">
+      <div class="card-tag">Hydration</div>
+      <div class="card-title">Cat Water Fountain</div>
+      <div class="card-desc">Keeps cats hydrated with fresh flowing water 24/7.</div>
+      <a class="btn" href="https://amzn.to/4u83nY4" target="_blank">🛒 Shop Now</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-emoji">🎯</div>
+    <div class="card-body">
+      <div class="card-tag">Toys</div>
+      <div class="card-title">Interactive Rolling Ball Toy</div>
+      <div class="card-desc">Indoor cats go crazy for this automatic toy.</div>
+      <a class="btn" href="https://amzn.to/4brKMyU" target="_blank">🛒 Shop Now</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-emoji">🪟</div>
+    <div class="card-body">
+      <div class="card-tag">Sleep</div>
+      <div class="card-title">Foldable Window Hammock</div>
+      <div class="card-desc">Sun-bathing just became their full-time job.</div>
+      <a class="btn" href="https://amzn.to/4ug7xx1" target="_blank">🛒 Shop Now</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-emoji">😌</div>
+    <div class="card-body">
+      <div class="card-tag">Wellness</div>
+      <div class="card-title">Feliway Calming Plug-In</div>
+      <div class="card-desc">Anxious cat? This pheromone diffuser works wonders.</div>
+      <a class="btn" href="https://amzn.to/47qqXVY" target="_blank">🛒 Shop Now</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-emoji">🌀</div>
+    <div class="card-body">
+      <div class="card-tag">Play</div>
+      <div class="card-title">3-Way Cat Tunnel</div>
+      <div class="card-desc">Hours of zoomie energy finally put to good use.</div>
+      <a class="btn" href="https://amzn.to/40XTVcb" target="_blank">🛒 Shop Now</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-emoji">😋</div>
+    <div class="card-body">
+      <div class="card-tag">Treats</div>
+      <div class="card-title">Catit Creamy Lickable Treats</div>
+      <div class="card-desc">The treat that makes cats do literally anything.</div>
+      <a class="btn" href="https://amzn.to/4s2k0Ty" target="_blank">🛒 Shop Now</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div class="brand">🐱 Cats Olympus</div>
+  <p>Follow us for daily cat content & new product finds</p>
+  <div class="social-row">
+    <a class="social-btn" href="https://pinterest.com/catsolympus" target="_blank">📌 Pinterest</a>
+    <a class="social-btn" href="https://youtube.com/@Catsolympus" target="_blank">▶️ YouTube</a>
+  </div>
+  <p class="disclaimer">As an Amazon Associate we earn from qualifying purchases.</p>
+</div>
+
+</body>
+</html>
