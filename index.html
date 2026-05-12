@@ -121,7 +121,10 @@
     border-radius: 2px;
   }
 
-  .featured-wrap {
+  .grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     padding: 20px 16px;
     max-width: 500px;
     margin: 0 auto;
@@ -136,6 +139,8 @@
     animation: fadeUp 0.5s ease both;
   }
 
+  .card:nth-child(2) { animation-delay: 0.1s; }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
@@ -143,13 +148,16 @@
 
   .card-image {
     width: 100%;
-    background: #e8f4fd;
+    background: #f0f4f8;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 32px;
     position: relative;
   }
+
+  .card-image.blue-bg { background: #e8f4fd; }
+  .card-image.white-bg { background: #f5f5f5; }
 
   .card-image img {
     width: 200px;
@@ -316,14 +324,16 @@
 </div>
 
 <div class="section-label">
-  <h2>Our Top Pick</h2>
+  <h2>Our Top Picks</h2>
   <p>Tried, tested & cat-approved</p>
   <div class="divider"></div>
 </div>
 
-<div class="featured-wrap">
+<div class="grid">
+
+  <!-- PAW CLEANER -->
   <div class="card">
-    <div class="card-image">
+    <div class="card-image blue-bg">
       <span class="hot-badge">🔥 Staff Pick</span>
       <img src="paw_cleaner.jpg" alt="Pet Paw Cleaning Cup" />
     </div>
@@ -331,7 +341,7 @@
       <div class="card-tag">Grooming</div>
       <div class="card-title">Paw Cleaning Cup</div>
       <div class="card-desc">
-        Tired of muddy paw prints all over the house? Just add a little water, dip your cat's paw in, twist — and it comes out spotless. Gentle silicone bristles, easy to clean, and under £10. An absolute must-have.
+        Tired of muddy paw prints all over the house? Just add a little water, dip your cat's paw in, twist — and it comes out spotless. Gentle silicone bristles, easy to clean, and under £10.
       </div>
       <div class="price-row">
         <div class="price">~£9</div>
@@ -343,11 +353,36 @@
         <div class="perk"><span class="perk-icon">✅</span> Easy to clean & reuse</div>
         <div class="perk"><span class="perk-icon">✅</span> Portable — take it on walks</div>
       </div>
-      <a class="btn" href="https://amzn.to/3Pb23Ut" target="_blank">
-        🛒 Shop on Amazon
-      </a>
+      <a class="btn" href="https://amzn.to/3Pb23Ut" target="_blank">🛒 Shop on Amazon</a>
     </div>
   </div>
+
+  <!-- HAIR REMOVER -->
+  <div class="card">
+    <div class="card-image white-bg">
+      <span class="hot-badge">⭐ Must Have</span>
+      <img src="hair_remover.jpg" alt="Pet Hair Remover Roller" />
+    </div>
+    <div class="card-body">
+      <div class="card-tag">Cleaning</div>
+      <div class="card-title">Pet Hair Remover Roller</div>
+      <div class="card-desc">
+        Cat hair on literally everything? This reusable roller picks up fur from sofas, carpets and clothes in seconds — no sticky sheets needed. Just roll, open, empty and repeat. A total lifesaver.
+      </div>
+      <div class="price-row">
+        <div class="price">~£10</div>
+        <div class="price-note">Reusable<br>no refills needed</div>
+      </div>
+      <div class="perks">
+        <div class="perk"><span class="perk-icon">✅</span> No sticky sheets — reusable forever</div>
+        <div class="perk"><span class="perk-icon">✅</span> Works on sofas, carpets & clothes</div>
+        <div class="perk"><span class="perk-icon">✅</span> Easy to empty in seconds</div>
+        <div class="perk"><span class="perk-icon">✅</span> Works for cats & dogs</div>
+      </div>
+      <a class="btn" href="https://amzn.to/4wuZspu" target="_blank">🛒 Shop on Amazon</a>
+    </div>
+  </div>
+
 </div>
 
 <div class="footer">
@@ -357,7 +392,7 @@
     <a class="social-btn" href="https://pinterest.com/catsolympus" target="_blank">📌 Pinterest</a>
     <a class="social-btn" href="https://youtube.com/@Catsolympus" target="_blank">▶️ YouTube</a>
   </div>
-  <p class="disclaimer">As an Amazon Associate we earn from qualifying purchases.</p>
+  <p class="disclaimer">As an Amazon Associate we earn from qualifying purchases. Some links may be affiliate links.</p>
 </div>
 
 </body>
